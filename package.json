@@ -1,0 +1,27 @@
+{
+  "name": "rick-and-morty-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimlin31/Rick-and-Morty-Challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grimlin31/Rick-and-Morty-Challenge/issues"
+  },
+  "homepage": "https://github.com/grimlin31/Rick-and-Morty-Challenge#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
