@@ -4,7 +4,7 @@ const originCharacterByEpisode = async (parameter) => {
     const { page, resultObj, mapCharacter } = {...parameter};
     const { results, info } = await getFromApi('episode', { page }).catch(e => {throw e})
 
-    results.map(async (episode) => {
+    for (const episode of results) {
         const originLocations = []
         for( const urlChar of episode.characters) {
             const characterLocation = mapCharacter.get(urlChar)
@@ -18,13 +18,13 @@ const originCharacterByEpisode = async (parameter) => {
             originLocations.push(characterLocation);
         };
         const locations = [...new Set(originLocations)]
-       resultObj.push({
+        resultObj.push({
             name: episode.name,
             episode: episode.episode,
             locations,
             locationsAmount: originLocations.length,
         })
-    })
+    }
 
     if ( !info?.next ) return resultObj
 
