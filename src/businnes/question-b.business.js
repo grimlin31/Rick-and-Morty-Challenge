@@ -1,4 +1,4 @@
-import { getFromApi } from "../requests.js";
+import { getByUrl, getFromApi } from "../requests.js";
 
 const originCharacterByEpisode = async (parameter) => {
     const { page, resultObj, mapCharacter } = {...parameter};
@@ -9,7 +9,7 @@ const originCharacterByEpisode = async (parameter) => {
         for( const urlChar of episode.characters) {
             const characterLocation = mapCharacter.get(urlChar)
             if (!characterLocation){
-                const newChar = await (await axios.get(urlChar)).data;
+                const newChar = await getByUrl(urlChar);
                 const newCharacLoc = newChar.origin.name
                 mapCharacter.set(urlChar, newCharacLoc);
                 originLocations.push(newCharacLoc)
