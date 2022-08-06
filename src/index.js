@@ -1,6 +1,8 @@
 import { originCharacterByEpisode } from "./businnes/question-b.business.js";
 import { countCharInNameResource } from "./businnes/questiona-a.business.js";
 
+import * as fs from 'fs';
+
 const challengeFunction = async () => {
 
     const resultChallenge = []
@@ -14,24 +16,35 @@ const challengeFunction = async () => {
         countCharInNameResource('character', { count: 0, char: 'c', page: 1 }),
     ]).catch(e => console.log(e.message))
 
-    console.log(resultQuestionA)
-
     const timeQuestionA = (Date.now() - timeStartQuestionA)/1000;
-    const data = {
+    const dataQuestionA = {
         exercise_name: "Char counter",
         time: `${Math.floor(timeQuestionA)}s ` + 
                 `${Math.floor((timeQuestionA - Math.floor(timeQuestionA))*1000)}ms`,
         in_time: timeQuestionA < 3,
         results: resultQuestionA
     }
-    resultChallenge.push(data)
-/*
-    // Question B
-    const resultQuestionB = await originCharacterByEpisode({ page: 1, resultObj: [], mapCharacter: new Map()})
-    console.log(resultQuestionB)
-*/
+    resultChallenge.push(dataQuestionA)
 
-    console.log(JSON.stringify(resultChallenge))
+    console.info(`Info: Question A is ready on ${timeQuestionA}s`)
+
+    // Question B
+    const timeStartQuestionB = Date.now();
+    const resultQuestionB = await originCharacterByEpisode({ page: 1, resultObj: [], mapCharacter: new Map()})
+    const timeQuestionB = (Date.now() - timeStartQuestionB)/1000;
+
+    const dataQuestionB = {
+        exercise_name: "Episode locations",
+        time: `${Math.floor(timeQuestionB)}s ` + 
+                `${Math.floor((timeQuestionB - Math.floor(timeQuestionB))*1000)}ms`,
+        in_time: timeQuestionB < 3,
+        results: resultQuestionB
+    }
+
+    resultChallenge.push(dataQuestionB)
+    console.info(`Info: Question B is ready on ${timeQuestionB}s.`)
+
+    fs.promises.writeFile('result.json', JSON.stringify(resultChallenge, null, 4))
 }
 
 challengeFunction()
