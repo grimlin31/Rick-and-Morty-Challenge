@@ -8,6 +8,12 @@ const getFromApi = async (api, params) => {
     return result.data
 }
 
+const getByUrl = async (url) => {
+    const result = await axios.get(url);
+    return result.data
+}
+
 export {
     getFromApi,
+    getByUrl
 }

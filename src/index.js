@@ -1,3 +1,4 @@
+import { originCharacterByEpisode } from "./businnes/question-b.business.js";
 import { getFromApi } from "./requests.js";
 import { countCharInString } from "./string.utils.js";
 
@@ -15,6 +16,7 @@ const countCharInNameResource = async (resource, parameter) => {
     }
     return await countCharInNameResource(resource, { count, char, page: page + 1 })
 }
+
 
 const dateStart = Date.now();
 Promise.all([
@@ -34,3 +36,11 @@ Promise.all([
 })
 .catch(e => console.log(e.message))
 
+const challengeFunction = async () => {
+
+    // Question B
+    const resultQustionB = await originCharacterByEpisode({ page: 1, resultObj: [], mapCharacter: new Map()})
+    console.log(resultQustionB)
+}
+
+challengeFunction()
