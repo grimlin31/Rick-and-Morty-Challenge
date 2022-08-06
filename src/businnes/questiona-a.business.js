@@ -1,5 +1,5 @@
 import { getFromApi } from "../requests.js";
-import { countCharInString } from "../string.utils.js";
+import { countCharInString } from "../utils/string.utils.js";
 
 const countCharInNameResource = async (resource, parameter) => {
     var { count, char, page } = {...parameter};
