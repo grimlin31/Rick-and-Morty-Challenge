@@ -1,4 +1,4 @@
-import axios from "axios";
+import { originCharacterByEpisode } from "./businnes/question-b.business.js";
 import { getFromApi } from "./requests.js";
 import { countCharInString } from "./string.utils.js";
 
@@ -35,3 +35,12 @@ Promise.all([
 
 })
 .catch(e => console.log(e.message))
+
+const challengeFunction = async () => {
+
+    // Question B
+    const resultQustionB = await originCharacterByEpisode({ page: 1, resultObj: [], mapCharacter: new Map()})
+    console.log(result)
+}
+
+challengeFunction()
