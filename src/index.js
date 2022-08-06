@@ -40,7 +40,7 @@ const challengeFunction = async () => {
 
     // Question B
     const resultQustionB = await originCharacterByEpisode({ page: 1, resultObj: [], mapCharacter: new Map()})
-    console.log(result)
+    console.log(resultQustionB)
 }
 
 challengeFunction()
