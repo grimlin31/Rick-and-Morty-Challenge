@@ -5,6 +5,9 @@ import * as fs from 'fs';
 
 const challengeFunction = async () => {
 
+    console.info(`Info: Starting Rick and Morty Challenge`)
+    console.info(`Info: Running question A ...`)
+
     const resultChallenge = []
 
     // Question A
@@ -27,6 +30,7 @@ const challengeFunction = async () => {
     resultChallenge.push(dataQuestionA)
 
     console.info(`Info: Question A is ready on ${timeQuestionA}s`)
+    console.info(`Info: Running question B ...`)
 
     // Question B
     const timeStartQuestionB = Date.now();
@@ -45,6 +49,7 @@ const challengeFunction = async () => {
     console.info(`Info: Question B is ready on ${timeQuestionB}s.`)
 
     fs.promises.writeFile('result.json', JSON.stringify(resultChallenge, null, 4))
+    console.info(`Info: Result in result.json.`)
 }
 
 challengeFunction()
