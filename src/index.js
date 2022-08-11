@@ -1,4 +1,4 @@
-import { originCharacterByEpisode } from "./businnes/question-b.business.js";
+import { mapCharacterBy, originCharacterByEpisode } from "./businnes/question-b.business.js";
 import { countCharInNameResource } from "./businnes/questiona-a.business.js";
 
 import * as fs from 'fs';
@@ -9,7 +9,7 @@ const challengeFunction = async () => {
     console.info(`Info: Running question A ...`)
 
     const resultChallenge = []
-
+    
     // Question A
     const timeStartQuestionA = Date.now();
 
@@ -34,7 +34,8 @@ const challengeFunction = async () => {
 
     // Question B
     const timeStartQuestionB = Date.now();
-    const resultQuestionB = await originCharacterByEpisode({ page: 1, resultObj: [], mapCharacter: new Map()})
+    const mapChar = await mapCharacterBy({page: 0, mapParameter: {}})
+    const resultQuestionB = await originCharacterByEpisode({ page: 1, resultObj: [], mapCharacter: mapChar})
     const timeQuestionB = (Date.now() - timeStartQuestionB)/1000;
 
     const dataQuestionB = {
@@ -52,4 +53,4 @@ const challengeFunction = async () => {
     console.info(`Info: Result in result.json.`)
 }
 
-challengeFunction()
+challengeFunction();
