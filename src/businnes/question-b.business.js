@@ -1,22 +1,32 @@
-import { getByUrl, getFromApi } from "../requests.js";
+import { getFromApi } from "../requests.js";
+import { arrayToMap } from "../utils/map.utils.js";
+
+const mapCharacterBy = async (parameter) => {
+    let { page, mapParameter} = {...parameter};
+
+    const { results, info } = await getFromApi('character', { page }).catch(e => {throw e});
+
+    const mapCharacter = arrayToMap(results, 'url', [ 'origin' ]);
+
+    if (!info.next) return {...mapParameter, ...mapCharacter};
+
+    return await mapCharacterBy({
+        page: page + 1,
+        mapParameter: {...mapParameter, ...mapCharacter}
+    })
+
+}
 
 const originCharacterByEpisode = async (parameter) => {
     const { page, resultObj, mapCharacter } = {...parameter};
+
     const { results, info } = await getFromApi('episode', { page }).catch(e => {throw e})
 
     for (const episode of results) {
-        const originLocations = []
-        for( const urlChar of episode.characters) {
-            const characterLocation = mapCharacter.get(urlChar)
-            if (!characterLocation){
-                const newChar = await getByUrl(urlChar);
-                const newCharacLoc = newChar.origin.name
-                mapCharacter.set(urlChar, newCharacLoc);
-                originLocations.push(newCharacLoc)
-                continue;
-            }
-            originLocations.push(characterLocation);
-        };
+        const originLocations = episode.characters.map((urlChar) => {
+            return mapCharacter[urlChar].name
+        });
+
         const locations = [...new Set(originLocations)]
         resultObj.push({
             name: episode.name,
@@ -33,5 +43,6 @@ const originCharacterByEpisode = async (parameter) => {
 }
 
 export {
-    originCharacterByEpisode
+    originCharacterByEpisode,
+    mapCharacterBy
 }
