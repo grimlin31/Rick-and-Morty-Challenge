@@ -23,8 +23,9 @@ Este proyecto consta de una carpeta principal _**src**_. Esta contiene todas las
     <br>`npm install`
 4. Ejecutar proyecto:
     <br>`npm start`
-    
-    
+5. Testear proyecto:
+    `npm test`
+
 ## Resultados
 
 Los resultados al terminar de ejecutarse aparecera un archivo en la carpeta del proyecto llamado **_result.json_**, el cual tendrá el resultado del challenge.
